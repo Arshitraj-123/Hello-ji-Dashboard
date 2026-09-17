@@ -76,7 +76,16 @@ app.use("/api/accounts", accountsRoutes);
 app.use("/api/customers", customersRoutes);
 app.use("/api/activity-logs", activityLogsRoutes);
 
-// ─── Health check ───────────────────────────────────────────────────────
+// ─── Root & Health check ────────────────────────────────────────────────
+app.get("/", (_req, res) => {
+  res.json({
+    status: "ok",
+    name: "HelloJi CRM API",
+    message: "API server is running. Access the frontend dashboard to use the app.",
+    health: "/api/health",
+  });
+});
+
 app.get("/api/health", (_req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
