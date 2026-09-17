@@ -1,0 +1,48 @@
+# ──────────────────────────────────────────────────────────────────
+# Render Blueprint — HelloJi CRM Backend
+#
+# Deploys the Express + MongoDB + Puppeteer API server as a Docker
+# web service with a persistent disk for uploaded files.
+#
+# Usage: connect this repo to Render, it will auto-detect render.yaml.
+# Set MONGODB_URI, CORS_ORIGIN, FRONTEND_URL, PUBLIC_BASE_URL, and
+# SEED_ADMIN_* values manually in the Render dashboard.
+# ──────────────────────────────────────────────────────────────────
+
+services:
+  - type: web
+    name: helloji-api
+    runtime: docker
+    dockerfilePath: ./server/Dockerfile
+    dockerContext: ./server
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "5000"
+      - key: MONGODB_URI
+        sync: false  # Set manually — Atlas connection string
+      - key: JWT_SECRET
+        generateValue: true
+      - key: SEED_ADMIN_NAME
+        sync: false
+      - key: SEED_ADMIN_EMAIL
+        sync: false
+      - key: SEED_ADMIN_PHONE
+        sync: false
+      - key: SEED_ADMIN_PASSWORD
+        sync: false
+      - key: CORS_ORIGIN
+        sync: false  # Set to deployed frontend URL
+      - key: FRONTEND_URL
+        sync: false  # Set to deployed frontend URL (used by Puppeteer)
+      - key: PUBLIC_BASE_URL
+        sync: false  # Set to this service's own URL (used for temp brochure URLs)
+      - key: PUPPETEER_SKIP_CHROMIUM_DOWNLOAD
+        value: "true"
+      - key: PUPPETEER_EXECUTABLE_PATH
+        value: /usr/bin/chromium
+    disk:
+      name: helloji-uploads
+      mountPath: /app/uploads
+      sizeGB: 1
