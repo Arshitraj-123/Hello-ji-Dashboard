@@ -46,7 +46,7 @@ export const Route = createFileRoute("/queries/$id")({
 const STATUSES: Status[] = [
   "New Query",
   "Pipeline",
-  "confirmed",
+  "Confirmed",
   "booked",
   "Abort",
 ];

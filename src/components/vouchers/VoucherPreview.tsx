@@ -1,5 +1,6 @@
-import { Plane, Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin } from "lucide-react";
 import type { Booking } from "@/lib/store";
+import { HELLOJI_LOGO_DATA_URI } from "./voucherLogos";
 
 const fmt = (value?: string) => value || "—";
 
@@ -39,8 +40,11 @@ export function VoucherPreview({ booking, compact = false }: { booking: Booking;
     <article id="voucher-document" className={`voucher-sheet bg-card text-foreground ${compact ? "p-5" : "p-7 sm:p-10"}`}>
       <header className="flex items-start justify-between gap-6 border-b-2 border-primary pb-6">
         <div className="flex items-center gap-3">
-          <span className="flex size-12 items-center justify-center rounded-md bg-primary text-primary-foreground"><Plane className="size-6" /></span>
-          <div><p className="font-display text-2xl font-bold">Helloji</p><p className="text-xs uppercase text-muted-foreground">Travel & booking desk</p></div>
+          <img
+            src={HELLOJI_LOGO_DATA_URI}
+            alt="Helloji"
+            className="h-10 w-auto object-contain"
+          />
         </div>
         <div className="text-right">
           <p className="text-xs font-semibold uppercase text-primary">Confirmed {booking.product} voucher</p>

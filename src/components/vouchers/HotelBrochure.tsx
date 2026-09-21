@@ -76,7 +76,7 @@ function SpecialAndNotes({ booking }: { booking: Booking }) {
             <p key={n.id} className="mt-1 text-sm text-[#555]">
               • {n.note}{" "}
               <span className="text-xs text-[#999]">
-                ({n.user}, {n.at})
+                ({typeof n.user === "object" && n.user ? n.user.name : String(n.user || "")}, {n.at})
               </span>
             </p>
           ))}

@@ -24,6 +24,7 @@ import {
   updateQueryRules,
   updateStatusRules,
   assignQueryRules,
+  raisedByQueryRules,
   convertBookingRules,
   addNoteRules,
   mongoIdParam,
@@ -162,7 +163,7 @@ router.get("/", async (req, res, next) => {
     const queryFilter = {
       ...visibilityFilter,
       deletedAt: null,
-      status: { $nin: ["Confirmed", "booked", "Abort"] },
+      status: { $nin: ["Confirmed", "confirmed", "booked", "Booked", "Abort", "abort"] },
     };
 
     // Optional status filter within active pipeline (e.g. ?status=Pipeline)
@@ -500,6 +501,72 @@ router.patch(
         changedData: {
           previousAgent: previousAgent.toString(),
           newAgent: targetAgent._id.toString(),
+        },
+      });
+
+      const responseData = applyRaisedByFilter(queryDoc, req.user);
+      return res.json(responseData);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+/**
+ * PATCH /api/queries/:id/raised-by
+ * Dedicated endpoint to update who raised the query (createdBy).
+ * Gated by: queries.assign
+ */
+router.patch(
+  "/:id/raised-by",
+  requirePermission("queries.assign"),
+  raisedByQueryRules,
+  validate,
+  async (req, res, next) => {
+    try {
+      const queryDoc = await Booking.findOne({
+        _id: req.params.id,
+        deletedAt: null,
+      });
+
+      if (!queryDoc) {
+        return res.status(404).json({
+          message: "Query not found",
+          code: "NOT_FOUND",
+        });
+      }
+
+      if (!canAccessDocument(queryDoc, req.user, "queries.viewAll")) {
+        return res.status(403).json({
+          message: "Access denied — you cannot modify this query",
+          code: "FORBIDDEN",
+        });
+      }
+
+      const targetUser = await User.findById(req.body.raisedBy);
+      if (!targetUser) {
+        return res.status(404).json({
+          message: "Target user not found",
+          code: "USER_NOT_FOUND",
+        });
+      }
+
+      const previousCreator = queryDoc.createdBy;
+      queryDoc.createdBy = targetUser._id;
+      await queryDoc.save();
+
+      await queryDoc.populate([
+        { path: "assignedAgent", select: "name email role photoUrl" },
+        { path: "createdBy", select: "name email role photoUrl" },
+      ]);
+
+      await recordActivity({
+        req,
+        activityType: "raised_by_changed",
+        recordId: queryDoc._id,
+        changedData: {
+          previousCreator: previousCreator ? previousCreator.toString() : "",
+          newCreator: targetUser._id.toString(),
         },
       });
 

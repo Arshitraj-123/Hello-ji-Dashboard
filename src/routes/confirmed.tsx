@@ -118,6 +118,7 @@ function Confirmed() {
       ) : (
         <BookingTable
           rows={rows}
+          variant="confirmed"
           onRefresh={fetchConfirmed}
           exportFilename="confirmed-queries"
           exportTitle="Confirmed Queries"

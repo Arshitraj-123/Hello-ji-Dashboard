@@ -33,9 +33,9 @@ router.get("/summary", async (req, res, next) => {
       await Promise.all([
         Booking.countDocuments({ ...filter, status: "New Query" }),
         Booking.countDocuments({ ...filter, status: "Pipeline" }),
-        Booking.countDocuments({ ...filter, status: "Confirmed" }),
-        Booking.countDocuments({ ...filter, status: "booked" }),
-        Booking.countDocuments({ ...filter, status: "Abort" }),
+        Booking.countDocuments({ ...filter, status: { $in: ["Confirmed", "confirmed"] } }),
+        Booking.countDocuments({ ...filter, status: { $in: ["booked", "Booked"] } }),
+        Booking.countDocuments({ ...filter, status: { $in: ["Abort", "abort"] } }),
       ]);
 
     // Product breakdown for bar chart

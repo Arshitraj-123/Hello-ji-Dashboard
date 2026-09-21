@@ -2,6 +2,11 @@ import { Phone, Mail, MapPin } from "lucide-react";
 import type { Booking } from "@/lib/store";
 import type { ReactNode } from "react";
 
+import {
+  HELLOJI_LOGO_DATA_URI,
+  INCREDIBLE_INDIA_LOGO_DATA_URI,
+} from "./voucherLogos";
+
 /**
  * Shared brochure / voucher wrapper.
  *
@@ -36,55 +41,24 @@ export function BrochureLayout({
         <header className="voucher-header">
           {/* Top Brand Bar */}
           <div className="flex items-center justify-between px-8 py-5 sm:px-12">
-            {/* Left: Official HelloJi Brand Logo with Angled Plane & Tagline */}
-            <div className="flex flex-col items-start">
-              <div className="flex items-baseline">
-                <span
-                  className="text-3xl font-black tracking-tight text-[#d32f2f]"
-                  style={{ fontFamily: "'Arial Black', 'Impact', sans-serif" }}
-                >
-                  HELL
-                  <span className="relative inline-flex items-center justify-center">
-                    O
-                    {/* Red angled plane swooshing across the O */}
-                    <svg
-                      className="absolute -top-1 -right-0.5 size-4 text-[#d32f2f]"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path d="M21 3L3 10.53L9.67 13.5L12.5 21L15.33 15.33L21 3Z" />
-                    </svg>
-                  </span>
-                </span>
-                <span
-                  className="text-3xl font-bold tracking-tight text-[#111827] ml-0.5"
-                  style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-                >
-                  Ji
-                </span>
-                <div className="flex flex-col text-[9px] font-bold leading-none ml-0.5 self-start pt-0.5">
-                  <span className="text-[#111827]">®</span>
-                  <span className="text-[#111827] -mt-0.5">.com</span>
-                </div>
-              </div>
-              <p className="text-[10px] font-bold tracking-wide text-[#d32f2f] mt-0.5">
-                book here <span className="font-semibold text-[#4b5563]">go anywhere</span>
-              </p>
+            {/* Left: Official HelloJi Brand Logo */}
+            <div className="flex items-center">
+              <img
+                src={HELLOJI_LOGO_DATA_URI}
+                alt="Helloji.com - book here go anywhere"
+                className="h-12 w-auto max-h-12 object-contain sm:h-14 sm:max-h-14"
+              />
+              <span className="sr-only">HELLO JI</span>
             </div>
 
-            {/* Right: Incredible India Government Approval Mark (plain text, no border/container) */}
-            <div className="text-right">
-              <p
-                className="text-xl font-bold tracking-tight text-[#111827]"
-                style={{ fontFamily: "'Playfair Display', 'Times New Roman', Georgia, serif" }}
-              >
-                Incredible <span className="text-[#d32f2f] font-black">!</span>ndia
-                <span className="sr-only">Incredible India</span>
-              </p>
-              <p className="text-[10px] font-medium text-[#111827] mt-0.5">
-                Approved by Ministry of Tourism <span className="text-[#d32f2f] font-bold mx-0.5">|</span> Govt. of India
-              </p>
+            {/* Right: Incredible India Government Approval Mark */}
+            <div className="flex items-center justify-end">
+              <img
+                src={INCREDIBLE_INDIA_LOGO_DATA_URI}
+                alt="Incredible India - Approved by Ministry of Tourism | Govt. of India"
+                className="h-10 w-auto max-h-10 object-contain sm:h-12 sm:max-h-12"
+              />
+              <span className="sr-only">Incredible India Approved by Ministry of Tourism | Govt. of India</span>
             </div>
           </div>
 

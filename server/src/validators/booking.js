@@ -192,6 +192,17 @@ export const updateStatusRules = [
     .trim()
     .notEmpty()
     .withMessage("Status is required")
+    .customSanitizer((val) => {
+      if (typeof val === "string") {
+        const lower = val.toLowerCase();
+        if (lower === "confirmed") return "Confirmed";
+        if (lower === "pipeline") return "Pipeline";
+        if (lower === "new query") return "New Query";
+        if (lower === "booked") return "booked";
+        if (lower === "abort") return "Abort";
+      }
+      return val;
+    })
     .isIn(BOOKING_STATUSES)
     .withMessage(`Status must be one of: ${BOOKING_STATUSES.join(", ")}`),
 ];
@@ -205,6 +216,17 @@ export const assignQueryRules = [
     .withMessage("Assigned agent ID is required")
     .custom((val) => mongoose.Types.ObjectId.isValid(val))
     .withMessage("Assigned agent must be a valid User ID"),
+];
+
+/** Dedicated raisedBy (creator) reassignment validation */
+export const raisedByQueryRules = [
+  ...mongoIdParam("id"),
+  body("raisedBy")
+    .trim()
+    .notEmpty()
+    .withMessage("Raised by user ID is required")
+    .custom((val) => mongoose.Types.ObjectId.isValid(val))
+    .withMessage("Raised by must be a valid User ID"),
 ];
 
 /** Conversion to booking and booking update validation — strictly approved schema */

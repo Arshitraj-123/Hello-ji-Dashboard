@@ -142,7 +142,7 @@ router.get("/confirmed", (req, res, next) => {
   }
 
   listBookingsWithFilter(req, res, next, {
-    status: "Confirmed",
+    status: { $in: ["Confirmed", "confirmed"] },
     deletedAt: null,
     ...dateFilter,
   });

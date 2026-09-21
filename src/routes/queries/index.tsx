@@ -101,7 +101,11 @@ function AllQueries() {
           </div>
         </div>
       ) : (
-        <BookingTable rows={rows} onRefresh={fetchQueries} />
+        <BookingTable
+          rows={rows}
+          variant="all-queries"
+          onRefresh={fetchQueries}
+        />
       )}
     </DashboardShell>
   );
