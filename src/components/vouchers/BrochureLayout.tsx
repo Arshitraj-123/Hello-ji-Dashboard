@@ -82,52 +82,52 @@ export function BrochureLayout({
 
       {/* ── Guest summary ─────────────────────────────────── */}
       <section className="border-b border-[#e5e5e5] px-8 pt-6 pb-6 sm:px-12">
-        <div className="grid gap-4 sm:grid-cols-2">
-          <div>
+        <div className="grid gap-4 sm:grid-cols-2 min-w-0">
+          <div className="min-w-0">
             <div className="flex items-center gap-2">
               <p className="brochure-label">Guest</p>
               <span className="text-[11px] text-[#888]">· {booking.bookingId}</span>
             </div>
             <h2
-              className="mt-1 text-2xl font-bold"
+              className="mt-1 text-2xl font-bold break-words [overflow-wrap:anywhere]"
               style={{ fontFamily: "'Archivo', sans-serif" }}
             >
               {booking.name}
             </h2>
-            <p className="mt-1.5 text-sm text-[#666]">
+            <p className="mt-1.5 text-sm text-[#666] break-words [overflow-wrap:anywhere]">
               {booking.enqueryType || booking.product} · {booking.destination || booking.city || "India"}
             </p>
           </div>
-          <div className="space-y-1.5 text-sm sm:text-right">
-            <p className="flex items-center gap-2 sm:justify-end">
-              <Phone className="size-3.5 text-[#c0392b]" />
-              {booking.phone}
+          <div className="space-y-1.5 text-sm sm:text-right min-w-0">
+            <p className="flex items-center gap-2 sm:justify-end break-all [overflow-wrap:anywhere]">
+              <Phone className="size-3.5 text-[#c0392b] shrink-0" />
+              <span>{booking.phone}</span>
             </p>
-            <p className="flex items-center gap-2 sm:justify-end">
-              <Mail className="size-3.5 text-[#c0392b]" />
-              {booking.email}
+            <p className="flex items-center gap-2 sm:justify-end break-all [overflow-wrap:anywhere]">
+              <Mail className="size-3.5 text-[#c0392b] shrink-0" />
+              <span>{booking.email}</span>
             </p>
-            <p className="flex items-center gap-2 sm:justify-end">
-              <MapPin className="size-3.5 text-[#c0392b]" />
-              {booking.city}
+            <p className="flex items-center gap-2 sm:justify-end break-words [overflow-wrap:anywhere]">
+              <MapPin className="size-3.5 text-[#c0392b] shrink-0" />
+              <span>{booking.city}</span>
             </p>
           </div>
         </div>
       </section>
 
       {/* ── Product-specific body ─────────────────────────── */}
-      <section className="px-8 py-6 sm:px-12">{children}</section>
+      <section className="px-8 py-6 sm:px-12 min-w-0">{children}</section>
 
       {/* ── Policy & Duty Manager ──────────────────────────── */}
       <div className="border-t border-[#e5e5e5] px-8 py-5 text-xs text-[#666] sm:px-12">
-        <div className="grid gap-4 sm:grid-cols-2">
-          <div>
+        <div className="grid gap-4 sm:grid-cols-2 min-w-0">
+          <div className="min-w-0">
             <p className="font-bold text-[#1a1a2e]">Booking Policy</p>
-            <p className="mt-1 leading-relaxed">{booking.bookingPolicy}</p>
+            <p className="mt-1 leading-relaxed break-words [overflow-wrap:anywhere]">{booking.bookingPolicy}</p>
           </div>
-          <div className="sm:text-right">
+          <div className="sm:text-right min-w-0">
             <p className="font-bold text-[#1a1a2e]">Duty Manager</p>
-            <p className="mt-1">
+            <p className="mt-1 break-words [overflow-wrap:anywhere]">
               {booking.dmName} · {booking.dmContact}
             </p>
           </div>

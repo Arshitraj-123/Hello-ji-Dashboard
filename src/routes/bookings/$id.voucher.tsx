@@ -202,6 +202,30 @@ function VoucherPage() {
     );
   }
 
+  if (booking.status !== "booked") {
+    return (
+      <main className="mx-auto max-w-3xl p-8">
+        <div className="rounded-lg border border-border bg-card p-6 shadow-xs">
+          <h1 className="text-2xl font-bold">Voucher Not Available</h1>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Vouchers can only be generated for booked enquiries. The current status of this enquiry ({booking.bookingId}) is{" "}
+            <span className="font-semibold text-foreground">"{booking.status}"</span>.
+          </p>
+          <div className="mt-6 flex gap-3">
+            <Button asChild>
+              <Link to="/queries/$id" params={{ id: booking.id || (booking as any)._id }}>
+                View Query Details
+              </Link>
+            </Button>
+            <Button asChild variant="outline">
+              <Link to="/bookings">Go to All Bookings</Link>
+            </Button>
+          </div>
+        </div>
+      </main>
+    );
+  }
+
   return (
     <>
       <main

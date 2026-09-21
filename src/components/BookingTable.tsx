@@ -724,9 +724,53 @@ export function BookingTable({
                         )}
                       </td>
 
-                      {/* 12. Status (Text 'Confirmed' as in Image 1) */}
-                      <td className="px-3 py-3 text-xs font-semibold text-foreground">
-                        {b.status}
+                      {/* 12. Status (Dropdown with Booked and Aborted options + Red Refresh Button) */}
+                      <td className="px-3 py-3">
+                        {showStatus && (
+                          canChangeStatus ? (
+                            <div className="flex items-center gap-1.5 whitespace-nowrap">
+                              <Select
+                                value={pendingStatus[targetId] ?? b.status}
+                                disabled={busyAction === `${targetId}-status`}
+                                onValueChange={(v) => {
+                                  setPendingStatus((prev) => ({
+                                    ...prev,
+                                    [targetId]: v,
+                                  }));
+                                }}
+                              >
+                                <SelectTrigger className="h-8 w-28 text-xs bg-white">
+                                  <SelectValue />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  <SelectItem value="Confirmed">Confirmed</SelectItem>
+                                  <SelectItem value="booked">Booked</SelectItem>
+                                  <SelectItem value="Abort">Aborted</SelectItem>
+                                  <SelectItem value="Pipeline">Pipeline</SelectItem>
+                                </SelectContent>
+                              </Select>
+                              <button
+                                type="button"
+                                disabled={busyAction === `${targetId}-status`}
+                                onClick={() => handleStatusUpdate(b)}
+                                className="h-8 w-8 rounded-md bg-[#b91c1c] hover:bg-[#991b1b] active:scale-95 flex items-center justify-center text-white shrink-0 shadow-xs transition-all disabled:opacity-50 cursor-pointer"
+                                title="Update Status"
+                              >
+                                <RefreshCw
+                                  className={cn(
+                                    "size-3.5 text-white",
+                                    busyAction === `${targetId}-status` &&
+                                      "animate-spin"
+                                  )}
+                                />
+                              </button>
+                            </div>
+                          ) : (
+                            <span className="text-xs font-semibold text-foreground">
+                              {b.status}
+                            </span>
+                          )
+                        )}
                       </td>
 
                       {/* 13. Action */}
@@ -760,21 +804,23 @@ export function BookingTable({
                               <Pencil className="size-4" />
                             </Link>
                           </Button>
-                          <Button
-                            asChild
-                            size="icon"
-                            variant="ghost"
-                            className="size-7"
-                            aria-label="Voucher"
-                            title="View Voucher"
-                          >
-                            <Link
-                              to="/bookings/$id/voucher"
-                              params={{ id: targetId }}
+                          {b.status === "booked" && (
+                            <Button
+                              asChild
+                              size="icon"
+                              variant="ghost"
+                              className="size-7"
+                              aria-label="Voucher"
+                              title="View Voucher"
                             >
-                              <FileText className="size-4 text-primary" />
-                            </Link>
-                          </Button>
+                              <Link
+                                to="/bookings/$id/voucher"
+                                params={{ id: targetId }}
+                              >
+                                <FileText className="size-4 text-primary" />
+                              </Link>
+                            </Button>
+                          )}
                         </div>
                       </td>
                     </>
@@ -1031,7 +1077,23 @@ export function BookingTable({
                               <Pencil className="size-4" />
                             </Link>
                           </Button>
-                          {b.status !== "booked" && (
+                          {b.status === "booked" ? (
+                            <Button
+                              asChild
+                              size="icon"
+                              variant="ghost"
+                              className="size-7"
+                              aria-label="Voucher"
+                              title="View Voucher"
+                            >
+                              <Link
+                                to="/bookings/$id/voucher"
+                                params={{ id: targetId }}
+                              >
+                                <FileText className="size-4 text-primary" />
+                              </Link>
+                            </Button>
+                          ) : (
                             <Button
                               size="icon"
                               variant="ghost"

@@ -62,19 +62,39 @@ export function VoucherPreview({ booking, compact = false }: { booking: Booking;
         </div>
       </section>
 
-      <section className="py-6">
+      <section className="py-6 min-w-0">
         <h2 className="mb-4 text-base font-bold capitalize">{booking.product} details</h2>
-        <dl className="grid grid-cols-2 gap-x-5 gap-y-4 sm:grid-cols-4">
-          {fields.map(([label, value]) => <div key={label}><dt className="voucher-label">{label}</dt><dd className="mt-1 text-sm font-semibold">{value}</dd></div>)}
+        <dl className="grid grid-cols-2 gap-x-5 gap-y-4 sm:grid-cols-4 min-w-0">
+          {fields.map(([label, value]) => (
+            <div key={label} className="min-w-0">
+              <dt className="voucher-label">{label}</dt>
+              <dd className="mt-1 text-sm font-semibold break-all [overflow-wrap:anywhere] [word-break:break-word]">{value}</dd>
+            </div>
+          ))}
         </dl>
-        {(booking.inclusion || booking.details) && <div className="mt-6 rounded-md bg-muted p-4"><p className="voucher-label">{booking.product === "package" ? "Inclusions" : "Important details"}</p><p className="mt-2 text-sm">{booking.inclusion || booking.details}</p></div>}
+        {(booking.inclusion || booking.details) && (
+          <div className="mt-6 rounded-md bg-muted p-4 min-w-0">
+            <p className="voucher-label">{booking.product === "package" ? "Inclusions" : "Important details"}</p>
+            <p className="mt-2 text-sm break-words [overflow-wrap:anywhere]">{booking.inclusion || booking.details}</p>
+          </div>
+        )}
       </section>
 
-      <section className="grid gap-4 border-t border-border py-6 sm:grid-cols-2">
-        <div><p className="voucher-label">Special request</p><p className="mt-1 text-sm">{booking.specialRequest}</p></div>
-        <div><p className="voucher-label">Assistance</p><p className="mt-1 text-sm">{booking.dmName} · {booking.dmContact}</p></div>
+      <section className="grid gap-4 border-t border-border py-6 sm:grid-cols-2 min-w-0">
+        <div className="min-w-0">
+          <p className="voucher-label">Special request</p>
+          <p className="mt-1 text-sm break-words [overflow-wrap:anywhere]">{booking.specialRequest}</p>
+        </div>
+        <div className="min-w-0">
+          <p className="voucher-label">Assistance</p>
+          <p className="mt-1 text-sm break-words [overflow-wrap:anywhere]">{booking.dmName} · {booking.dmContact}</p>
+        </div>
       </section>
-      <footer className="border-t border-border pt-5 text-xs text-muted-foreground"><p className="font-semibold text-foreground">Booking policy</p><p className="mt-1">{booking.bookingPolicy}</p><p className="mt-5 text-center">Thank you for choosing Helloji. Have a wonderful journey.</p></footer>
+      <footer className="border-t border-border pt-5 text-xs text-muted-foreground min-w-0">
+        <p className="font-semibold text-foreground">Booking policy</p>
+        <p className="mt-1 break-words [overflow-wrap:anywhere]">{booking.bookingPolicy}</p>
+        <p className="mt-5 text-center">Thank you for choosing Helloji. Have a wonderful journey.</p>
+      </footer>
     </article>
   );
 }

@@ -345,7 +345,7 @@ function QueryDetail() {
       }
     >
       <div className="grid gap-6 lg:grid-cols-3">
-        <div className="card-surface space-y-5 p-6 lg:col-span-2">
+        <div className="card-surface space-y-5 p-6 lg:col-span-2 min-w-0">
           <div className="flex flex-wrap items-center gap-3">
             <StatusBadge status={booking.status} />
             <PriorityBadge priority={booking.priority} />
@@ -354,7 +354,7 @@ function QueryDetail() {
             </span>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-2 min-w-0">
             <F
               label="Name"
               value={booking.name}
@@ -662,7 +662,7 @@ function Section({
   return (
     <div className="space-y-4">
       <h2 className="text-base font-semibold">{title}</h2>
-      <div className="grid gap-4 sm:grid-cols-2">{children}</div>
+      <div className="grid gap-4 sm:grid-cols-2 min-w-0">{children}</div>
     </div>
   );
 }
@@ -679,12 +679,14 @@ function F({
   onChange: (v: string) => void;
 }) {
   return (
-    <div className="space-y-2">
+    <div className="space-y-2 min-w-0 overflow-hidden">
       <Label>{label}</Label>
       {editing ? (
         <Input defaultValue={value} onBlur={(e) => onChange(e.target.value)} />
       ) : (
-        <p className="text-sm">{value || "—"}</p>
+        <p className="text-sm break-all [overflow-wrap:anywhere] [word-break:break-word] text-foreground">
+          {value || "—"}
+        </p>
       )}
     </div>
   );

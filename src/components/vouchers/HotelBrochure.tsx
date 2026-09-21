@@ -52,9 +52,9 @@ export function HotelBrochure({
 
 function Field({ label, value }: { label: string; value: string }) {
   return (
-    <div>
+    <div className="min-w-0">
       <dt className="brochure-label">{label}</dt>
-      <dd className="mt-1 text-sm font-semibold">{value}</dd>
+      <dd className="mt-1 text-sm font-semibold break-all [overflow-wrap:anywhere] [word-break:break-word]">{value}</dd>
     </div>
   );
 }

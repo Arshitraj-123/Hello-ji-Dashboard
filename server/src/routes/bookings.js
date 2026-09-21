@@ -113,7 +113,7 @@ async function listBookingsWithFilter(req, res, next, baseFilter) {
  */
 router.get("/", (req, res, next) => {
   listBookingsWithFilter(req, res, next, {
-    status: "booked",
+    status: { $in: ["booked", "Booked"] },
     deletedAt: null,
   });
 });
@@ -257,7 +257,7 @@ router.get(
       );
 
       const queryFilter = {
-        status: "booked",
+        status: { $in: ["booked", "Booked"] },
         deletedAt: null,
         ...visibilityFilter,
         ...dateQuery,
@@ -279,7 +279,7 @@ router.get(
 
 /**
  * GET /api/bookings/calendar/full
- * Unfiltered calendar view (shows ALL bookings regardless of status or user).
+ * Unfiltered calendar view (shows ALL bookings with status = 'booked').
  * Gated strictly by: calendar.menu AND (admin role OR booking.viewAll permission).
  */
 router.get(
@@ -304,6 +304,7 @@ router.get(
       );
 
       const queryFilter = {
+        status: { $in: ["booked", "Booked"] },
         deletedAt: null,
         ...dateQuery,
       };

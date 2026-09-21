@@ -199,7 +199,7 @@ export const updateStatusRules = [
         if (lower === "pipeline") return "Pipeline";
         if (lower === "new query") return "New Query";
         if (lower === "booked") return "booked";
-        if (lower === "abort") return "Abort";
+        if (lower === "abort" || lower === "aborted") return "Abort";
       }
       return val;
     })
