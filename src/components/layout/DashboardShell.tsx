@@ -126,7 +126,20 @@ export function DashboardShell({
                 </p>
               )}
               {g.items.map((item) => {
-                const active = path === item.to || (item.to !== "/dashboard" && path.startsWith(item.to));
+                const isExact = path === item.to;
+                const hasMoreSpecificItem = filteredGroups.some((group) =>
+                  group.items.some(
+                    (other) =>
+                      other.to !== item.to &&
+                      other.to.startsWith(item.to) &&
+                      (path === other.to || path.startsWith(other.to + "/"))
+                  )
+                );
+                const active =
+                  isExact ||
+                  (!hasMoreSpecificItem &&
+                    item.to !== "/dashboard" &&
+                    (path === item.to || path.startsWith(item.to + "/")));
                 return (
                   <Link
                     key={item.to}
