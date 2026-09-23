@@ -3,7 +3,7 @@ import { useState, type ReactNode } from "react";
 import {
   LayoutDashboard, FilePlus2, ListChecks, BadgeCheck, BookMarked, CalendarDays,
   Ban, Hotel, Users, Wallet, Trash2, Settings, LogOut, Menu, Search, Bell, Plane,
-  ScrollText, UserCog, ShieldCheck,
+  ScrollText, UserCog, ShieldCheck, Bed, Share, Recycle,
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -40,8 +40,13 @@ const groups: { title?: string; items: Item[] }[] = [
     items: [{ to: "/accounts", label: "Unpaid / Paid", icon: Wallet, permission: "accounts.menu" }],
   },
   {
-    title: "Visa Customers",
-    items: [{ to: "/customers", label: "All Customers", icon: Users, permission: "customer.view" }],
+    title: "BOOKING TICKET",
+    items: [
+      { to: "/booking-tickets/add", label: "Add Ticket", icon: Bed },
+      { to: "/booking-tickets/unapproved", label: "Unapproved Tickets", icon: Share },
+      { to: "/booking-tickets/approved", label: "All Approved", icon: Share },
+      { to: "/booking-tickets/recycle-bin", label: "Recycle Bin", icon: Recycle },
+    ],
   },
   {
     title: "Administration",

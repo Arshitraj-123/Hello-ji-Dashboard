@@ -22,10 +22,15 @@ import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as RolesRouteImport } from './routes/roles'
 import { Route as TrashRouteImport } from './routes/trash'
 import { Route as UsersRouteImport } from './routes/users'
+import { Route as BookingTicketsAddRouteImport } from './routes/booking-tickets/add'
+import { Route as BookingTicketsApprovedRouteImport } from './routes/booking-tickets/approved'
+import { Route as BookingTicketsRecycleBinRouteImport } from './routes/booking-tickets/recycle-bin'
+import { Route as BookingTicketsUnapprovedRouteImport } from './routes/booking-tickets/unapproved'
 import { Route as BookingsIndexRouteImport } from './routes/bookings/index'
 import { Route as QueriesIndexRouteImport } from './routes/queries/index'
 import { Route as QueriesIdRouteImport } from './routes/queries/$id'
 import { Route as QueriesNewRouteImport } from './routes/queries/new'
+import { Route as BookingTicketsIdPrintRouteImport } from './routes/booking-tickets/$id.print'
 import { Route as BookingsIdVoucherRouteImport } from './routes/bookings/$id.voucher'
 
 const IndexRoute = IndexRouteImport.update({
@@ -93,6 +98,28 @@ const UsersRoute = UsersRouteImport.update({
   path: '/users',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BookingTicketsAddRoute = BookingTicketsAddRouteImport.update({
+  id: '/booking-tickets/add',
+  path: '/booking-tickets/add',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookingTicketsApprovedRoute = BookingTicketsApprovedRouteImport.update({
+  id: '/booking-tickets/approved',
+  path: '/booking-tickets/approved',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookingTicketsRecycleBinRoute =
+  BookingTicketsRecycleBinRouteImport.update({
+    id: '/booking-tickets/recycle-bin',
+    path: '/booking-tickets/recycle-bin',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const BookingTicketsUnapprovedRoute =
+  BookingTicketsUnapprovedRouteImport.update({
+    id: '/booking-tickets/unapproved',
+    path: '/booking-tickets/unapproved',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const BookingsIndexRoute = BookingsIndexRouteImport.update({
   id: '/bookings/',
   path: '/bookings/',
@@ -111,6 +138,11 @@ const QueriesIdRoute = QueriesIdRouteImport.update({
 const QueriesNewRoute = QueriesNewRouteImport.update({
   id: '/queries/new',
   path: '/queries/new',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookingTicketsIdPrintRoute = BookingTicketsIdPrintRouteImport.update({
+  id: '/booking-tickets/$id/print',
+  path: '/booking-tickets/$id/print',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BookingsIdVoucherRoute = BookingsIdVoucherRouteImport.update({
@@ -133,10 +165,15 @@ export interface FileRoutesByFullPath {
   '/roles': typeof RolesRoute
   '/trash': typeof TrashRoute
   '/users': typeof UsersRoute
+  '/booking-tickets/add': typeof BookingTicketsAddRoute
+  '/booking-tickets/approved': typeof BookingTicketsApprovedRoute
+  '/booking-tickets/recycle-bin': typeof BookingTicketsRecycleBinRoute
+  '/booking-tickets/unapproved': typeof BookingTicketsUnapprovedRoute
   '/queries/$id': typeof QueriesIdRoute
   '/queries/new': typeof QueriesNewRoute
   '/bookings/': typeof BookingsIndexRoute
   '/queries/': typeof QueriesIndexRoute
+  '/booking-tickets/$id/print': typeof BookingTicketsIdPrintRoute
   '/bookings/$id/voucher': typeof BookingsIdVoucherRoute
 }
 export interface FileRoutesByTo {
@@ -153,10 +190,15 @@ export interface FileRoutesByTo {
   '/roles': typeof RolesRoute
   '/trash': typeof TrashRoute
   '/users': typeof UsersRoute
+  '/booking-tickets/add': typeof BookingTicketsAddRoute
+  '/booking-tickets/approved': typeof BookingTicketsApprovedRoute
+  '/booking-tickets/recycle-bin': typeof BookingTicketsRecycleBinRoute
+  '/booking-tickets/unapproved': typeof BookingTicketsUnapprovedRoute
   '/queries/$id': typeof QueriesIdRoute
   '/queries/new': typeof QueriesNewRoute
   '/bookings': typeof BookingsIndexRoute
   '/queries': typeof QueriesIndexRoute
+  '/booking-tickets/$id/print': typeof BookingTicketsIdPrintRoute
   '/bookings/$id/voucher': typeof BookingsIdVoucherRoute
 }
 export interface FileRoutesById {
@@ -174,10 +216,15 @@ export interface FileRoutesById {
   '/roles': typeof RolesRoute
   '/trash': typeof TrashRoute
   '/users': typeof UsersRoute
+  '/booking-tickets/add': typeof BookingTicketsAddRoute
+  '/booking-tickets/approved': typeof BookingTicketsApprovedRoute
+  '/booking-tickets/recycle-bin': typeof BookingTicketsRecycleBinRoute
+  '/booking-tickets/unapproved': typeof BookingTicketsUnapprovedRoute
   '/queries/$id': typeof QueriesIdRoute
   '/queries/new': typeof QueriesNewRoute
   '/bookings/': typeof BookingsIndexRoute
   '/queries/': typeof QueriesIndexRoute
+  '/booking-tickets/$id/print': typeof BookingTicketsIdPrintRoute
   '/bookings/$id/voucher': typeof BookingsIdVoucherRoute
 }
 export interface FileRouteTypes {
@@ -196,10 +243,15 @@ export interface FileRouteTypes {
     | '/roles'
     | '/trash'
     | '/users'
+    | '/booking-tickets/add'
+    | '/booking-tickets/approved'
+    | '/booking-tickets/recycle-bin'
+    | '/booking-tickets/unapproved'
     | '/queries/$id'
     | '/queries/new'
     | '/bookings/'
     | '/queries/'
+    | '/booking-tickets/$id/print'
     | '/bookings/$id/voucher'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -216,10 +268,15 @@ export interface FileRouteTypes {
     | '/roles'
     | '/trash'
     | '/users'
+    | '/booking-tickets/add'
+    | '/booking-tickets/approved'
+    | '/booking-tickets/recycle-bin'
+    | '/booking-tickets/unapproved'
     | '/queries/$id'
     | '/queries/new'
     | '/bookings'
     | '/queries'
+    | '/booking-tickets/$id/print'
     | '/bookings/$id/voucher'
   id:
     | '__root__'
@@ -236,10 +293,15 @@ export interface FileRouteTypes {
     | '/roles'
     | '/trash'
     | '/users'
+    | '/booking-tickets/add'
+    | '/booking-tickets/approved'
+    | '/booking-tickets/recycle-bin'
+    | '/booking-tickets/unapproved'
     | '/queries/$id'
     | '/queries/new'
     | '/bookings/'
     | '/queries/'
+    | '/booking-tickets/$id/print'
     | '/bookings/$id/voucher'
   fileRoutesById: FileRoutesById
 }
@@ -257,10 +319,15 @@ export interface RootRouteChildren {
   RolesRoute: typeof RolesRoute
   TrashRoute: typeof TrashRoute
   UsersRoute: typeof UsersRoute
+  BookingTicketsAddRoute: typeof BookingTicketsAddRoute
+  BookingTicketsApprovedRoute: typeof BookingTicketsApprovedRoute
+  BookingTicketsRecycleBinRoute: typeof BookingTicketsRecycleBinRoute
+  BookingTicketsUnapprovedRoute: typeof BookingTicketsUnapprovedRoute
   QueriesIdRoute: typeof QueriesIdRoute
   QueriesNewRoute: typeof QueriesNewRoute
   BookingsIndexRoute: typeof BookingsIndexRoute
   QueriesIndexRoute: typeof QueriesIndexRoute
+  BookingTicketsIdPrintRoute: typeof BookingTicketsIdPrintRoute
   BookingsIdVoucherRoute: typeof BookingsIdVoucherRoute
 }
 
@@ -357,6 +424,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UsersRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/booking-tickets/add': {
+      id: '/booking-tickets/add'
+      path: '/booking-tickets/add'
+      fullPath: '/booking-tickets/add'
+      preLoaderRoute: typeof BookingTicketsAddRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/booking-tickets/approved': {
+      id: '/booking-tickets/approved'
+      path: '/booking-tickets/approved'
+      fullPath: '/booking-tickets/approved'
+      preLoaderRoute: typeof BookingTicketsApprovedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/booking-tickets/recycle-bin': {
+      id: '/booking-tickets/recycle-bin'
+      path: '/booking-tickets/recycle-bin'
+      fullPath: '/booking-tickets/recycle-bin'
+      preLoaderRoute: typeof BookingTicketsRecycleBinRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/booking-tickets/unapproved': {
+      id: '/booking-tickets/unapproved'
+      path: '/booking-tickets/unapproved'
+      fullPath: '/booking-tickets/unapproved'
+      preLoaderRoute: typeof BookingTicketsUnapprovedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/bookings/': {
       id: '/bookings/'
       path: '/bookings'
@@ -385,6 +480,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof QueriesNewRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/booking-tickets/$id/print': {
+      id: '/booking-tickets/$id/print'
+      path: '/booking-tickets/$id/print'
+      fullPath: '/booking-tickets/$id/print'
+      preLoaderRoute: typeof BookingTicketsIdPrintRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/bookings/$id/voucher': {
       id: '/bookings/$id/voucher'
       path: '/bookings/$id/voucher'
@@ -409,10 +511,15 @@ const rootRouteChildren: RootRouteChildren = {
   RolesRoute: RolesRoute,
   TrashRoute: TrashRoute,
   UsersRoute: UsersRoute,
+  BookingTicketsAddRoute: BookingTicketsAddRoute,
+  BookingTicketsApprovedRoute: BookingTicketsApprovedRoute,
+  BookingTicketsRecycleBinRoute: BookingTicketsRecycleBinRoute,
+  BookingTicketsUnapprovedRoute: BookingTicketsUnapprovedRoute,
   QueriesIdRoute: QueriesIdRoute,
   QueriesNewRoute: QueriesNewRoute,
   BookingsIndexRoute: BookingsIndexRoute,
   QueriesIndexRoute: QueriesIndexRoute,
+  BookingTicketsIdPrintRoute: BookingTicketsIdPrintRoute,
   BookingsIdVoucherRoute: BookingsIdVoucherRoute,
 }
 export const routeTree = rootRouteImport

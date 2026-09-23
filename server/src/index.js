@@ -28,6 +28,7 @@ import bookingsRoutes from "./routes/bookings.js";
 import hotelsRoutes from "./routes/hotels.js";
 import accountsRoutes from "./routes/accounts.js";
 import customersRoutes from "./routes/customers.js";
+import bookingTicketRoutes from "./routes/bookingTickets.js";
 import activityLogsRoutes from "./routes/activityLogs.js";
 import { checkSmtpHealth } from "./services/emailService.js";
 import {
@@ -74,6 +75,7 @@ app.use("/api/bookings", bookingsRoutes);
 app.use("/api/hotels", hotelsRoutes);
 app.use("/api/accounts", accountsRoutes);
 app.use("/api/customers", customersRoutes);
+app.use("/api/booking-tickets", bookingTicketRoutes);
 app.use("/api/activity-logs", activityLogsRoutes);
 
 // ─── Root & Health check ────────────────────────────────────────────────
